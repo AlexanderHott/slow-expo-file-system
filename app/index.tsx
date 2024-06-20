@@ -69,6 +69,30 @@ export default function App() {
     >
       <Text>read image 256kb perf</Text>
     </Pressable>
+
+    <Pressable onPressIn={() => {
+      // for (let i = 0; i < 20; ++i) {
+      Promise.allSettled([
+        readImage(0, 1024 * 256),
+        readImage(0, 1024 * 256),
+        readImage(0, 1024 * 256),
+        readImage(0, 1024 * 256),
+        readImage(0, 1024 * 256),
+        readImage(0, 1024 * 256),
+        readImage(0, 1024 * 256),
+        readImage(0, 1024 * 256),
+        readImage(0, 1024 * 256),
+        readImage(0, 1024 * 256),
+        readImage(0, 1024 * 256),
+        readImage(0, 1024 * 256),
+        readImage(0, 1024 * 256),
+      ]).then(d => console.log("data", d.map(res => res.status === "fulfilled" ? res.value : res.reason))).catch(e => console.log("error", e));
+      // }
+    }}
+      style={{ padding: 16, backgroundColor: "teal" }}
+    >
+      <Text>read image 256kb perf Promise.allSettled</Text>
+    </Pressable>
   </View>;
 }
 
